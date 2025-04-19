@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function App() {
+function Signup() {
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignup = async () => {
+    await axios.post('/signup', { userId, password });
+    alert('User signed up!');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Signup</h1>
+      <input
+        type="text"
+        placeholder="User ID"
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleSignup}>Sign Up</button>
     </div>
   );
+  console.log('User ID:', userId);
 }
 
-export default App;
+export default Signup;
+
